@@ -9,6 +9,6 @@ public class RedRoom extends Room {
 
     @Override
     public Color getColor() {
-        return Color.RED;
+        return new Color(255, 50, 50);
     }
 }

@@ -2,13 +2,13 @@ package maze;
 
 import java.awt.Color;
 
-public class BlueRoom extends Room {
-    public BlueRoom(int num) {
+public class GreenRoom extends Room {
+    public GreenRoom(int num) {
         super(num);
     }
 
     @Override
     public Color getColor() {
-        return Color.BLUE;
+        return Color.GREEN;
     }
 }
