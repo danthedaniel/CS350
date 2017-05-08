@@ -2,6 +2,8 @@ package edu.drexel.dpa34;
 
 import edu.drexel.dpa34.questions.Question;
 import edu.drexel.dpa34.questions.Response;
+import edu.drexel.dpa34.serialization.JSONFormatException;
+import edu.drexel.dpa34.serialization.JSONSpec;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

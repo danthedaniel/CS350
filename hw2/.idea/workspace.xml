@@ -7,12 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="933efab1-08ae-4dcd-80ef-e768f63575ed" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/FormatException.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/JSONFormatException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/InputException.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/UserInputException.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/AsJSON.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/AsJSON.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/JSONFormatException.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONFormatException.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/JSONSpec.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONSpec.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/Answerable.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/Answerable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/AsJSON.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/AsJSON.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/JSONSpec.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/JSONSpec.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/Main.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/Repository.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/Repository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/drexel/dpa34/Survey.java" afterPath="$PROJECT_DIR$/src/edu/drexel/dpa34/Survey.java" />
@@ -38,13 +37,33 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="JSONSpec.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/JSONSpec.java">
+        <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONSpec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1104">
-              <caret line="69" column="5" lean-forward="true" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+            <state relative-caret-position="336">
+              <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsJSON.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/AsJSON.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JSONFormatException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONFormatException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,6 +120,7 @@
         <option value="$PROJECT_DIR$/src/edu/drexel/dpa34/JSONFormatException.java" />
         <option value="$PROJECT_DIR$/src/edu/drexel/dpa34/InputException.java" />
         <option value="$PROJECT_DIR$/src/edu/drexel/dpa34/UserInputException.java" />
+        <option value="$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONSpec.java" />
       </list>
     </option>
   </component>
@@ -171,28 +191,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dpa34" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hw2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hw2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dpa34" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="questions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -479,6 +477,8 @@
           <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#802#803#0" expanded="true" />
+            <element signature="e#834#835#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -493,7 +493,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/AsJSON.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/AsJSON.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
@@ -501,7 +501,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/JSONSpec.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONSpec.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="32" column="47" lean-forward="true" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
@@ -535,11 +535,13 @@
           <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#802#803#0" expanded="true" />
+            <element signature="e#834#835#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/JSONSpec.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONSpec.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
@@ -565,6 +567,8 @@
           <caret line="52" column="47" lean-forward="false" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#802#803#0" expanded="true" />
+            <element signature="e#834#835#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -648,8 +652,8 @@
         <state relative-caret-position="48">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
-            <element signature="e#440#441#0" expanded="false" />
-            <element signature="e#468#469#0" expanded="false" />
+            <element signature="e#545#546#0" expanded="false" />
+            <element signature="e#573#574#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -749,16 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/Answerable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/Repository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3344">
@@ -779,34 +773,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/AsJSON.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/AsJSON.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state relative-caret-position="0">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/JSONFormatException.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONFormatException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
+        <state relative-caret-position="0">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/Answerable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#802#803#0" expanded="true" />
+            <element signature="e#834#835#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/UserInputException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="128">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/JSONSpec.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/drexel/dpa34/serialization/JSONSpec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="69" column="5" lean-forward="true" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+        <state relative-caret-position="336">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

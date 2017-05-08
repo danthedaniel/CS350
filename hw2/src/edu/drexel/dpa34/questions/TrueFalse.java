@@ -1,8 +1,8 @@
 package edu.drexel.dpa34.questions;
 
-import edu.drexel.dpa34.JSONFormatException;
+import edu.drexel.dpa34.serialization.JSONFormatException;
 import edu.drexel.dpa34.UserInputException;
-import edu.drexel.dpa34.JSONSpec;
+import edu.drexel.dpa34.serialization.JSONSpec;
 import org.json.simple.JSONObject;
 
 import java.util.Scanner;

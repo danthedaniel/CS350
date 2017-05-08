@@ -1,4 +1,4 @@
-package edu.drexel.dpa34;
+package edu.drexel.dpa34.serialization;
 
 import org.json.simple.JSONObject;
 

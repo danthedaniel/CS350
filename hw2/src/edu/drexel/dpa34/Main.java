@@ -1,5 +1,6 @@
 package edu.drexel.dpa34;
 
+import edu.drexel.dpa34.serialization.JSONFormatException;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;

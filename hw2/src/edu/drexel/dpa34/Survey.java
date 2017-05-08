@@ -1,6 +1,8 @@
 package edu.drexel.dpa34;
 
 import edu.drexel.dpa34.questions.Response;
+import edu.drexel.dpa34.serialization.AsJSON;
+import edu.drexel.dpa34.serialization.JSONFormatException;
 import org.json.simple.JSONObject;
 
 public class Survey extends Answerable implements AsJSON {

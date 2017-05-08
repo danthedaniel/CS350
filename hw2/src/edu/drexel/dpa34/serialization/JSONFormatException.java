@@ -1,4 +1,4 @@
-package edu.drexel.dpa34;
+package edu.drexel.dpa34.serialization;
 
 /**
  * JSONFormatException is thrown when JSON is passed into a method that does not conform to the expected format.
