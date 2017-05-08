@@ -1,8 +1,8 @@
 package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.AsJSON;
-import edu.drexel.dpa34.FormatException;
-import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONFormatException;
+import edu.drexel.dpa34.UserInputException;
 import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public abstract class Question implements AsJSON {
     protected String prompt = "";
-    protected String answer = "";
+    String answer = "";
     private static String jsonSpec = "{\"type\":\"\"}";
 
     /**
@@ -21,9 +21,9 @@ public abstract class Question implements AsJSON {
      * @param object The serialized object. Must have a "type" key.
      * @param graded Whether the question will be graded for points.
      * @return A de-serialized Question.
-     * @throws FormatException When no "type" key exists, or contains an unknown type.
+     * @throws JSONFormatException When no "type" key exists, or contains an unknown type.
      */
-    public static Question fromJSON(JSONObject object, boolean graded) throws FormatException {
+    public static Question fromJSON(JSONObject object, boolean graded) throws JSONFormatException {
         JSONSpec.testObject(jsonSpec, object);
 
         switch ((String) object.get("type")) {
@@ -40,11 +40,11 @@ public abstract class Question implements AsJSON {
             case "TrueFalse":
                 return new TrueFalse(object, graded);
             default:
-                throw new FormatException("Invalid Question type.");
+                throw new JSONFormatException("Invalid Question type.");
         }
     }
 
-    protected void readPrompt() {
+    void readPrompt() {
         Scanner scanner = new Scanner(System.in);
 
         while (this.prompt.equals("")) {
@@ -57,9 +57,9 @@ public abstract class Question implements AsJSON {
      * Create a question from user input.
      * @param graded Whether the question will be graded for points.
      * @return A newly-created Question.
-     * @throws InputException When a user provides invalid input.
+     * @throws UserInputException When a user provides invalid input.
      */
-    public static Question fromInput(boolean graded) throws InputException {
+    public static Question fromInput(boolean graded) throws UserInputException {
         System.out.println("Add a new question:");
         System.out.println("1) Add a new T/F question");
         System.out.println("2) Add a new multiple choice question");
@@ -84,7 +84,7 @@ public abstract class Question implements AsJSON {
             case "6":
                 return new Matching(graded);
             default:
-                throw new InputException("Not a valid selection.");
+                throw new UserInputException("Not a valid selection.");
         }
     }
 
@@ -92,17 +92,17 @@ public abstract class Question implements AsJSON {
      * Collect a test/survey taker's response to a question.
      * @param questionNumber The question number to display.
      * @return The user's response to the question.
-     * @throws InputException When a user provides invalid input.
+     * @throws UserInputException When a user provides invalid input.
      */
-    public abstract Response collectAnswer(int questionNumber) throws InputException;
+    public abstract Response collectAnswer(int questionNumber) throws UserInputException;
 
     /**
      * Judge whether an answer is correct or not.
      * @param response The answer to judge.
      * @return Whether the answer is correct.
-     * @throws FormatException If the JSON of the response isn't formatted as expected by the question.
+     * @throws JSONFormatException If the JSON of the response isn't formatted as expected by the question.
      */
-    public abstract boolean gradeAnswer(Response response) throws FormatException;
+    public abstract boolean gradeAnswer(Response response) throws JSONFormatException;
 
     /**
      * Show the prompt and possible answers (when appropriate).

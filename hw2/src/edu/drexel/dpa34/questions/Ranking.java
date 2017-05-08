@@ -1,7 +1,7 @@
 package edu.drexel.dpa34.questions;
 
-import edu.drexel.dpa34.FormatException;
-import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONFormatException;
+import edu.drexel.dpa34.UserInputException;
 import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +15,7 @@ public class Ranking extends Question {
     private static String jsonSpecUngraded = "{\"prompt\":\"\",\"options\":[\"\"]}";
     private static String jsonSpecGraded = "{\"prompt\":\"\",\"options\":[\"\"],\"answer\":[\"\"]}";
 
-    Ranking(boolean graded) throws InputException {
+    Ranking(boolean graded) throws UserInputException {
         Scanner scanner = new Scanner(System.in);
         readPrompt();
 
@@ -42,7 +42,7 @@ public class Ranking extends Question {
         }
     }
 
-    Ranking(JSONObject object, boolean graded) throws FormatException {
+    Ranking(JSONObject object, boolean graded) throws JSONFormatException {
         JSONSpec.testObject(graded ? jsonSpecGraded : jsonSpecUngraded, object);
 
         this.prompt = (String) object.get("prompt");
@@ -55,7 +55,7 @@ public class Ranking extends Question {
             ranked.forEach(rank -> this.ranked.add((String) rank));
 
             if (this.options.size() != this.ranked.size())
-                throw new FormatException("Ranking answer and options must be of the same size.");
+                throw new JSONFormatException("Ranking answer and options must be of the same size.");
         }
     }
 
@@ -79,7 +79,7 @@ public class Ranking extends Question {
         System.out.println();
     }
 
-    public Response collectAnswer(int questionNumber) throws InputException {
+    public Response collectAnswer(int questionNumber) throws UserInputException {
         ArrayList<String> userRanks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String rankInput;
@@ -102,7 +102,7 @@ public class Ranking extends Question {
         return new Response(questionNumber, response);
     }
 
-    public boolean gradeAnswer(Response response) throws FormatException {
+    public boolean gradeAnswer(Response response) throws JSONFormatException {
         return false;
     }
 

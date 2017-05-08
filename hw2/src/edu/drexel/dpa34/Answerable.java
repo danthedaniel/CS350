@@ -25,9 +25,9 @@ public abstract class Answerable {
     /**
      * De-serialize an Answerable from JSON.
      * @param object Contains the Answerable's name, questions, and previous responses.
-     * @throws FormatException When the JSON is not formatted properly.
+     * @throws JSONFormatException When the JSON is not formatted properly.
      */
-    Answerable(JSONObject object) throws FormatException {
+    Answerable(JSONObject object) throws JSONFormatException {
         JSONSpec.testObject(jsonSpec, object);
 
         JSONObject definition = (JSONObject) object.get("definition");
@@ -46,7 +46,7 @@ public abstract class Answerable {
     private void addQuestionFromJSON(JSONObject question) {
         try {
             this.questions.add(Question.fromJSON(question, gradeable()));
-        } catch (FormatException e) {
+        } catch (JSONFormatException e) {
             System.err.println("Question JSON is malformed:");
             System.err.println(e.getMessage());
         }
@@ -64,7 +64,7 @@ public abstract class Answerable {
                 responseArray[i] = new Response((JSONObject) responses.get(i));
 
             this.completed.add(responseArray);
-        } catch (FormatException e) {
+        } catch (JSONFormatException e) {
             System.err.println("Response JSON is malformed.");
             System.err.println(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
@@ -75,11 +75,11 @@ public abstract class Answerable {
     /**
      * If no responses already exist for the Answerable, take user input to add a new Question.
      */
-    public void addQuestion() {
+    private void addQuestion() {
         if (modifiable()) {
             try {
                 this.questions.add(Question.fromInput(gradeable()));
-            } catch (InputException e) {
+            } catch (UserInputException e) {
                 System.err.println(e.getMessage());
             }
         } else {
@@ -87,7 +87,7 @@ public abstract class Answerable {
         }
     }
 
-    public void addQuestions() {
+    void addQuestions() {
         Scanner scanner = new Scanner(System.in);
 
         while (this.questions.size() == 0)
@@ -103,7 +103,7 @@ public abstract class Answerable {
     /**
      * Display all questions and (if applicable) answers.
      */
-    public void display() {
+    void display() {
         for (int i = 0; i < this.questions.size(); i++)
             this.questions.get(i).display(i, gradeable());
     }
@@ -129,12 +129,8 @@ public abstract class Answerable {
      */
     public abstract Response[] collectResponse();
 
-    public String getName() {
+    String getName() {
         return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**

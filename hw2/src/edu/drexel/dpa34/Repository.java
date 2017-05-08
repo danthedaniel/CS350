@@ -5,7 +5,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,10 +23,11 @@ public class Repository implements AsJSON {
     /**
      * Create a Repository from the contents of a JSON file.
      * @param path The file path to a file containing a JSON-serialized Repository.
-     * @throws IOException Thrown if the file can not be opened.
-     * @throws ParseException Thrown if the file is not valid JSON.
+     * @throws IOException If the file can not be opened.
+     * @throws ParseException If the file is not valid JSON.
+     * @throws JSONFormatException If the file does not conform to the spec.
      */
-    Repository(String path) throws FormatException, ParseException, IOException {
+    Repository(String path) throws JSONFormatException, ParseException, IOException {
         JSONParser parser = new JSONParser();
         JSONObject repo = (JSONObject) parser.parse(new FileReader(path));
 
@@ -51,7 +51,7 @@ public class Repository implements AsJSON {
     /**
      * Display the top-level Repository menu and take user input.
      */
-    public void menu() {
+    void menu() {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -108,7 +108,7 @@ public class Repository implements AsJSON {
                         newName = scanner.nextLine();
                     }
 
-                    if (findTestByName(newName) == null) {
+                    if (findByName(this.tests, newName) == null) {
                         Test newTest = createTest(newName);
                         newTest.addQuestions();
                     } else {
@@ -118,7 +118,7 @@ public class Repository implements AsJSON {
                 case "2":
                     System.out.println("Enter the name of the test:");
                     String query = scanner.nextLine();
-                    Test test = findTestByName(query);
+                    Test test = (Test) findByName(this.tests, query);
 
                     if (test == null)
                         System.out.println("Could not find test by the name: " + query);
@@ -154,7 +154,7 @@ public class Repository implements AsJSON {
                         newName = scanner.nextLine();
                     }
 
-                    if (findSurveyByName(newName) == null) {
+                    if (findByName(this.surveys, newName) == null) {
                         Survey newSurvey = createSurvey(newName);
                         newSurvey.addQuestions();
                     } else {
@@ -164,7 +164,7 @@ public class Repository implements AsJSON {
                 case "2":
                     System.out.println("Enter the name of the survey:");
                     String query = scanner.nextLine();
-                    Survey survey = findSurveyByName(query);
+                    Survey survey = (Survey) findByName(this.surveys, query);
 
                     if (survey == null)
                         System.out.println("Could not find survey by the name: " + query);
@@ -181,27 +181,15 @@ public class Repository implements AsJSON {
     }
 
     /**
-     * Find a test in the repository by its name. Returns null if none is found.
-     * @param name The name of the target repository.
-     * @return A test with the given name or null.
+     * Find a test/survey in the repository by its name. Returns null if none is found.
+     * @param list A list of Answerables.
+     * @param name The name of the target test/survey.
+     * @return A test/survey with the given name or null.
      */
-    private Test findTestByName(String name) {
-        for (Test test : this.tests)
-            if (test.getName().equals(name))
-                return test;
-
-        return null;
-    }
-
-    /**
-     * Find a survey in the repository by its name. Returns null if none is found.
-     * @param name The name of the target repository.
-     * @return A survey with the given name or null.
-     */
-    private Survey findSurveyByName(String name) {
-        for (Survey survey : this.surveys)
-            if (survey.getName().equals(name))
-                return survey;
+    private Answerable findByName(ArrayList<? extends Answerable> list, String name) {
+        for (Answerable ans : list)
+            if (ans.getName().equals(name))
+                return ans;
 
         return null;
     }
@@ -213,7 +201,7 @@ public class Repository implements AsJSON {
     private void addTestFromJSON(JSONObject testRepo) {
         try {
             this.tests.add(new Test(testRepo));
-        } catch (FormatException e) {
+        } catch (JSONFormatException e) {
             System.err.println("Invalid Test format.");
         }
     }
@@ -225,7 +213,7 @@ public class Repository implements AsJSON {
     private void addSurveyFromJSON(JSONObject surveyRepo) {
         try {
             this.surveys.add(new Survey(surveyRepo));
-        } catch (FormatException e) {
+        } catch (JSONFormatException e) {
             System.err.println("Invalid Survey format.");
             System.err.println(e.getMessage());
         }
@@ -236,7 +224,7 @@ public class Repository implements AsJSON {
      * @param name The name of the Test.
      * @return The newly created empty Test object.
      */
-    public Test createTest(String name) {
+    private Test createTest(String name) {
         Test test = new Test(name);
         this.tests.add(test);
         return test;
@@ -247,7 +235,7 @@ public class Repository implements AsJSON {
      * @param name The name of the Survey.
      * @return The newly created empty Survey object.
      */
-    public Survey createSurvey(String name) {
+    private Survey createSurvey(String name) {
         Survey survey = new Survey(name);
         this.surveys.add(survey);
         return survey;
@@ -257,7 +245,7 @@ public class Repository implements AsJSON {
      * Save the current repo to the destination specified.
      * @throws IOException If the file could not be written to.
      */
-    public void saveToFile(String path) throws IOException {
+    private void saveToFile(String path) throws IOException {
         JSONObject object = asJSON();
 
         try{

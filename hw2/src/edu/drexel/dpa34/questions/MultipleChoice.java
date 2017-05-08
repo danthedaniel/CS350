@@ -1,7 +1,7 @@
 package edu.drexel.dpa34.questions;
 
-import edu.drexel.dpa34.FormatException;
-import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONFormatException;
+import edu.drexel.dpa34.UserInputException;
 import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,9 +21,9 @@ public class MultipleChoice extends Question {
     /**
      * Create a new MultipleChoice question from user input
      * @param graded Whether to collect a correct answer.
-     * @throws InputException If the user provides invalid input.
+     * @throws UserInputException If the user provides invalid input.
      */
-    MultipleChoice(boolean graded) throws InputException {
+    MultipleChoice(boolean graded) throws UserInputException {
         Scanner scanner = new Scanner(System.in);
         readPrompt();
 
@@ -35,7 +35,7 @@ public class MultipleChoice extends Question {
                 options.add(input);
             } else {
                 if (options.size() == 0)
-                    throw new InputException("Can't have 0 options");
+                    throw new UserInputException("Can't have 0 options");
                 else
                     break;
             }
@@ -54,9 +54,9 @@ public class MultipleChoice extends Question {
      * De-serialize a MultipleChoice question from JSON.
      * @param object The JSON object to reify from.
      * @param graded Whether to expect a correct answer in the JSON.
-     * @throws FormatException If the JSON is not formatted properly.
+     * @throws JSONFormatException If the JSON is not formatted properly.
      */
-    MultipleChoice(JSONObject object, boolean graded) throws FormatException {
+    MultipleChoice(JSONObject object, boolean graded) throws JSONFormatException {
         JSONSpec.testObject(graded ? jsonSpecGraded : jsonSpecUngraded, object);
 
         this.prompt = (String) object.get("prompt");
@@ -64,7 +64,7 @@ public class MultipleChoice extends Question {
         options.forEach(option -> this.options.add((String) option));
 
         if (this.options.size() > labels.length)
-            throw new FormatException("Can't have more than 5 options per question");
+            throw new JSONFormatException("Can't have more than 5 options per question");
 
         if (graded)
             this.answer = (String) object.get("answer");
@@ -120,9 +120,9 @@ public class MultipleChoice extends Question {
      * Show the prompt and get user input for an answer.
      * @param questionNumber The question number to display.
      * @return The user's answer as a Response object.
-     * @throws InputException If the user provides invalid input.
+     * @throws UserInputException If the user provides invalid input.
      */
-    public Response collectAnswer(int questionNumber) throws InputException {
+    public Response collectAnswer(int questionNumber) throws UserInputException {
         display(questionNumber, false);
 
         Scanner scanner = new Scanner(System.in);
@@ -138,13 +138,13 @@ public class MultipleChoice extends Question {
      * Judge whether the answer provided is correct.
      * @param response The answer to judge.
      * @return Whether the answer provided is correct
-     * @throws FormatException If the provided response is not valid.
+     * @throws JSONFormatException If the provided response is not valid.
      */
-    public boolean gradeAnswer(Response response) throws FormatException {
+    public boolean gradeAnswer(Response response) throws JSONFormatException {
         JSONObject jsonResponse = response.getResponse();
 
         if (!jsonResponse.containsKey("answer"))
-            throw new FormatException("Response must contain an answer.");
+            throw new JSONFormatException("Response must contain an answer.");
 
         String userAnswer = (String) jsonResponse.get("answer");
 

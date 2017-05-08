@@ -4,7 +4,7 @@ import edu.drexel.dpa34.questions.Response;
 import org.json.simple.JSONObject;
 
 public class Survey extends Answerable implements AsJSON {
-    Survey(JSONObject object) throws FormatException {
+    Survey(JSONObject object) throws JSONFormatException {
         super(object);
     }
 

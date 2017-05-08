@@ -1,7 +1,7 @@
 package edu.drexel.dpa34.questions;
 
-import edu.drexel.dpa34.FormatException;
-import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONFormatException;
+import edu.drexel.dpa34.UserInputException;
 import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
@@ -33,7 +33,7 @@ public class Matching extends Question {
         }
     }
 
-    Matching(JSONObject object, boolean graded) throws FormatException {
+    Matching(JSONObject object, boolean graded) throws JSONFormatException {
         JSONSpec.testObject(jsonSpec, object);
 
         this.prompt = (String) object.get("prompt");
@@ -60,11 +60,11 @@ public class Matching extends Question {
         System.out.println();
     }
 
-    public Response collectAnswer(int questionNumber) throws InputException {
+    public Response collectAnswer(int questionNumber) throws UserInputException {
         return new Response(questionNumber, new JSONObject());
     }
 
-    public boolean gradeAnswer(Response response) throws FormatException {
+    public boolean gradeAnswer(Response response) throws JSONFormatException {
         return false;
     }
 

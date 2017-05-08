@@ -1,0 +1,2 @@
+Integer[] testArray = new Integer[] {2, 2, 1};
+Integer[] correctArray = new Integer[] {1, 2, 2};

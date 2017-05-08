@@ -1,7 +1,7 @@
 package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.AsJSON;
-import edu.drexel.dpa34.FormatException;
+import edu.drexel.dpa34.JSONFormatException;
 import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
@@ -27,7 +27,7 @@ public class Response implements AsJSON {
      * De-serialize a Response from a JSON object.
      * @param object The serialized Response object.
      */
-    public Response(JSONObject object) throws FormatException {
+    public Response(JSONObject object) throws JSONFormatException {
         JSONSpec.testObject(jsonSpec, object);
 
         this.questionNumber = (int) object.get("questionNumber");

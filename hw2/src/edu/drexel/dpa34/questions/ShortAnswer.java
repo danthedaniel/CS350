@@ -1,7 +1,7 @@
 package edu.drexel.dpa34.questions;
 
-import edu.drexel.dpa34.FormatException;
-import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONFormatException;
+import edu.drexel.dpa34.UserInputException;
 import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
@@ -22,7 +22,7 @@ public class ShortAnswer extends Question {
         }
     }
 
-    ShortAnswer(JSONObject object, boolean graded) throws FormatException {
+    ShortAnswer(JSONObject object, boolean graded) throws JSONFormatException {
         JSONSpec.testObject(graded ? jsonSpecGraded : jsonSpecUngraded, object);
 
         this.prompt = (String) object.get("prompt");
@@ -36,7 +36,7 @@ public class ShortAnswer extends Question {
         System.out.println();
     }
 
-    public Response collectAnswer(int questionNumber) throws InputException {
+    public Response collectAnswer(int questionNumber) throws UserInputException {
         display(questionNumber, false);
 
         Scanner scanner = new Scanner(System.in);
@@ -48,9 +48,9 @@ public class ShortAnswer extends Question {
         return new Response(questionNumber, response);
     }
 
-    public boolean gradeAnswer(Response response) throws FormatException {
+    public boolean gradeAnswer(Response response) throws JSONFormatException {
         if (!response.getResponse().containsKey("answer"))
-            throw new FormatException("Short answer question definition must contain an answer.");
+            throw new JSONFormatException("Short answer question definition must contain an answer.");
 
         String answer = (String) response.getResponse().get("answer");
         return answer.equals(this.answer);

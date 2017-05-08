@@ -23,7 +23,7 @@ public class Main {
         try {
             repo = new Repository(repoPath);
             System.out.println("Repository opened from " + repoPath);
-        } catch (FormatException e) {
+        } catch (JSONFormatException e) {
             System.out.println("Repository format is not valid.");
             return;
         } catch (FileNotFoundException e) {
