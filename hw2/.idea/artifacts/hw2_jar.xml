@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="hw2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/hw2_jar</output-path>
+    <root id="root">
+      <element id="archive" name="hw2.jar">
+        <element id="module-output" name="hw2" />
+        <element id="library" level="project" name="json-simple-1.1.1" />
+      </element>
+    </root>
+  </artifact>
+</component>

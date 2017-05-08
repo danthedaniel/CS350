@@ -1,0 +1,19 @@
+For this assignment I chose to serialize the data using JSON,
+with the help of the json-simple library. Instead of serializing
+tests and surveys into their own files, they're serialized into
+repositories containing other surveys and tests.
+
+I've included two repositories here, foo.json, and bar.json.
+
+foo.json contains one test named "Foobar!", and a survey named
+"Rick and Morty".
+
+bar.json contains one survey named "CS350".
+
+Not all methods are given docstrings since they are already
+documented in the abstract class they inherit from. This is the
+case with most Question subclasses, except for the MultipleChoice
+class.
+
+The driver code is largely in the Repository class, with the prompts
+for all Questions in the Question class and subclasses.
