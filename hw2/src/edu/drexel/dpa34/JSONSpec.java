@@ -7,6 +7,15 @@ import org.json.simple.parser.ParseException;
 
 /**
  * Contains methods for comparing a reference JSON specification against a JSONObject.
+ *
+ * Reference specifications define only the types of the values within JSONObjects. An example specification for an
+ * object that must have two keys, "foo" and "bar", where "foo" corresponds to an array of strings and "bar"
+ * corresponds to a number would look like this:
+ *
+ * {
+ *     "foo": [""],
+ *     "bar": 0
+ * }
  */
 public class JSONSpec {
     /**
@@ -16,12 +25,16 @@ public class JSONSpec {
      * @throws FormatException If the tested object does not conform to the spec.
      * @throws ParseException If the spec object is not valid JSON.
      */
-    public static void testObject(String spec, JSONObject object) throws FormatException {
+    public static void testObject(String spec, Object object) throws FormatException {
         JSONParser parser = new JSONParser();
 
         try {
-            JSONObject jsonSpec = (JSONObject) parser.parse(spec);
-            objectTypeCheck(jsonSpec, object, "");
+            Object jsonSpec = parser.parse(spec);
+
+            if (jsonSpec instanceof JSONObject)
+                objectTypeCheck((JSONObject) jsonSpec, (JSONObject) object, "");
+            else if (jsonSpec instanceof JSONArray)
+                arrayTypeCheck((JSONArray) jsonSpec, (JSONArray) object, "");
         } catch (ParseException e) {
             System.err.println("JSON spec string is not valid JSON. No tests will be performed on the provided object.");
         }
