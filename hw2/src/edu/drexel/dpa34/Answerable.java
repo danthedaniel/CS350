@@ -12,6 +12,7 @@ public abstract class Answerable {
     protected ArrayList<Question> questions = new ArrayList<>();
     private ArrayList<Response[]> completed = new ArrayList<>();
     private String name;
+    private static String jsonSpec = "{\"definition\":{\"name\":\"\",\"questions\":[{}]},\"completed\":[[{}]]}";
 
     /**
      * Create an empty Answerable with nothing but a name.
@@ -23,20 +24,17 @@ public abstract class Answerable {
 
     /**
      * De-serialize an Answerable from JSON.
-     * @param definition Contains the name and questions in the test/survey.
-     * @param completed Contains the responses to the survey.
+     * @param object Contains the Answerable's name, questions, and previous responses.
      * @throws FormatException When the JSON is not formatted properly.
      */
-    Answerable(JSONObject definition, JSONArray completed) throws FormatException {
-        if (!definition.containsKey("name"))
-            throw new FormatException("Survey requires a name.");
+    Answerable(JSONObject object) throws FormatException {
+        JSONSpec.testObject(jsonSpec, object);
 
-        if (!definition.containsKey("questions"))
-            throw new FormatException("Survey requires questions.");
-
+        JSONObject definition = (JSONObject) object.get("definition");
         this.name = (String) definition.get("name");
 
         JSONArray questions = (JSONArray) definition.get("questions");
+        JSONArray completed = (JSONArray) object.get("completed");
         questions.forEach(question -> addQuestionFromJSON((JSONObject) question));
         completed.forEach(responses -> addCompletedFromJSON((JSONArray) responses));
     }
@@ -68,6 +66,7 @@ public abstract class Answerable {
             this.completed.add(responseArray);
         } catch (FormatException e) {
             System.err.println("Response JSON is malformed.");
+            System.err.println(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Response JSON is not in sync with the surveys's definition.");
         }

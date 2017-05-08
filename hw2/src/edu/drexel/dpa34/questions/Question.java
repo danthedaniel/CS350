@@ -3,6 +3,7 @@ package edu.drexel.dpa34.questions;
 import edu.drexel.dpa34.AsJSON;
 import edu.drexel.dpa34.FormatException;
 import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
 import java.util.Scanner;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 public abstract class Question implements AsJSON {
     protected String prompt = "";
     protected String answer = "";
+    private static String jsonSpec = "{\"type\":\"\"}";
 
     /**
      * Create a question from a serialized state.
@@ -22,7 +24,9 @@ public abstract class Question implements AsJSON {
      * @throws FormatException When no "type" key exists, or contains an unknown type.
      */
     public static Question fromJSON(JSONObject object, boolean graded) throws FormatException {
-        switch ((String) object.getOrDefault("type", "")) {
+        JSONSpec.testObject(jsonSpec, object);
+
+        switch ((String) object.get("type")) {
             case "Essay":
                 return new Essay(object, graded);
             case "Matching":

@@ -2,11 +2,15 @@ package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.FormatException;
 import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
 import java.util.Scanner;
 
 public class TrueFalse extends Question {
+    private static String jsonSpecUngraded = "{\"prompt\":\"\"}";
+    private static String jsonSpecGraded = "{\"prompt\":\"\",\"answer\":\"\"}";
+
     TrueFalse(boolean graded) {
         Scanner scanner = new Scanner(System.in);
         readPrompt();
@@ -19,13 +23,9 @@ public class TrueFalse extends Question {
     }
 
     TrueFalse(JSONObject object, boolean graded) throws FormatException {
-        if (!object.containsKey("prompt"))
-            throw new FormatException("True/false question definition must contain a prompt.");
-        if (!object.containsKey("answer") && graded)
-            throw new FormatException("True/false question definition must contain an answer.");
+        JSONSpec.testObject(graded ? jsonSpecGraded : jsonSpecUngraded, object);
 
         this.prompt = (String) object.get("prompt");
-
         if (graded)
             this.answer = (String) object.get("answer");
     }

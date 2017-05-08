@@ -2,12 +2,15 @@ package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.FormatException;
 import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Matching extends Question {
+    private static String jsonSpec = "{\"prompt\":\"\",\"matchingPairs\":{}}";
+
     private HashMap<String, String> matchingPairs = new HashMap<>();
 
     Matching(boolean graded) {
@@ -31,10 +34,7 @@ public class Matching extends Question {
     }
 
     Matching(JSONObject object, boolean graded) throws FormatException {
-        if (!object.containsKey("prompt"))
-            throw new FormatException("Matching question definition must contain a prompt.");
-        if (!object.containsKey("matchingPairs"))
-            throw new FormatException("Matching question definition must contain matchingPairs");
+        JSONSpec.testObject(jsonSpec, object);
 
         this.prompt = (String) object.get("prompt");
         JSONObject jsonPairs = (JSONObject) object.get("matchingPairs");

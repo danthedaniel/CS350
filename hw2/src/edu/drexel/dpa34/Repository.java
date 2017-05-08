@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class Repository implements AsJSON {
     private ArrayList<Survey> surveys = new ArrayList<>();
     private ArrayList<Test> tests = new ArrayList<>();
-    private String path;
+    private static String jsonSpec = "{\"tests\":[{}],\"surveys\":[{}]}";
 
     /**
      * Create a Repository from the contents of a JSON file.
@@ -27,13 +27,14 @@ public class Repository implements AsJSON {
      * @throws IOException Thrown if the file can not be opened.
      * @throws ParseException Thrown if the file is not valid JSON.
      */
-    Repository(String path) throws ParseException, IOException {
-        this.path = path;
+    Repository(String path) throws FormatException, ParseException, IOException {
         JSONParser parser = new JSONParser();
         JSONObject repo = (JSONObject) parser.parse(new FileReader(path));
 
-        JSONArray surveyRepos = (JSONArray) repo.getOrDefault("surveys", new JSONArray());
-        JSONArray testRepos = (JSONArray) repo.getOrDefault("tests", new JSONArray());
+        JSONSpec.testObject(jsonSpec, repo);
+
+        JSONArray surveyRepos = (JSONArray) repo.get("surveys");
+        JSONArray testRepos = (JSONArray) repo.get("tests");
 
         surveyRepos.forEach(surveyRepo -> addSurveyFromJSON((JSONObject) surveyRepo));
         testRepos.forEach(testRepo -> addTestFromJSON((JSONObject) testRepo));
@@ -210,11 +211,8 @@ public class Repository implements AsJSON {
      * @param testRepo The JSONObject containing a Test's responses and definition.
      */
     private void addTestFromJSON(JSONObject testRepo) {
-        JSONObject definition = (JSONObject) testRepo.getOrDefault("definition", new JSONObject());
-        JSONArray completed = (JSONArray) testRepo.getOrDefault("completed", new JSONArray());
-
         try {
-            this.tests.add(new Test(definition, completed));
+            this.tests.add(new Test(testRepo));
         } catch (FormatException e) {
             System.err.println("Invalid Test format.");
         }
@@ -225,13 +223,11 @@ public class Repository implements AsJSON {
      * @param surveyRepo The JSONObject containing a Survey's responses and definition.
      */
     private void addSurveyFromJSON(JSONObject surveyRepo) {
-        JSONObject definition = (JSONObject) surveyRepo.getOrDefault("definition", new JSONObject());
-        JSONArray completed = (JSONArray) surveyRepo.getOrDefault("completed", new JSONArray());
-
         try {
-            this.surveys.add(new Survey(definition, completed));
+            this.surveys.add(new Survey(surveyRepo));
         } catch (FormatException e) {
             System.err.println("Invalid Survey format.");
+            System.err.println(e.getMessage());
         }
     }
 

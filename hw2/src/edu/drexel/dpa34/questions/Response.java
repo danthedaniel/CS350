@@ -2,6 +2,7 @@ package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.AsJSON;
 import edu.drexel.dpa34.FormatException;
+import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
 /**
@@ -10,6 +11,7 @@ import org.json.simple.JSONObject;
 public class Response implements AsJSON {
     private JSONObject response;
     private int questionNumber;
+    private static String jsonSpec = "{\"questionNumber\":0,\"response\":{}}";
 
     /**
      * Create a response from newly-entered information.
@@ -26,11 +28,7 @@ public class Response implements AsJSON {
      * @param object The serialized Response object.
      */
     public Response(JSONObject object) throws FormatException {
-        if (!object.containsKey("questionNumber"))
-            throw new FormatException("Response must have a question number");
-
-        if (!object.containsKey("response"))
-            throw new FormatException("Response must have contents.");
+        JSONSpec.testObject(jsonSpec, object);
 
         this.questionNumber = (int) object.get("questionNumber");
         this.response = (JSONObject) object.get("response");

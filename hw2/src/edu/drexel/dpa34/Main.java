@@ -23,6 +23,9 @@ public class Main {
         try {
             repo = new Repository(repoPath);
             System.out.println("Repository opened from " + repoPath);
+        } catch (FormatException e) {
+            System.out.println("Repository format is not valid.");
+            return;
         } catch (FileNotFoundException e) {
             repo = new Repository();
             System.out.println("Repository not found, creating a blank one");

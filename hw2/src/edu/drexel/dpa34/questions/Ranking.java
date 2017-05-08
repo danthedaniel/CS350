@@ -2,6 +2,7 @@ package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.FormatException;
 import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -11,6 +12,8 @@ import java.util.Scanner;
 public class Ranking extends Question {
     private ArrayList<String> ranked = new ArrayList<>();
     private ArrayList<String> options = new ArrayList<>();
+    private static String jsonSpecUngraded = "{\"prompt\":\"\",\"options\":[\"\"]}";
+    private static String jsonSpecGraded = "{\"prompt\":\"\",\"options\":[\"\"],\"answer\":[\"\"]}";
 
     Ranking(boolean graded) throws InputException {
         Scanner scanner = new Scanner(System.in);
@@ -40,12 +43,7 @@ public class Ranking extends Question {
     }
 
     Ranking(JSONObject object, boolean graded) throws FormatException {
-        if (!object.containsKey("prompt"))
-            throw new FormatException("Ranking question definition must contain a prompt.");
-        if (!object.containsKey("options"))
-            throw new FormatException("Ranking question definition must contain options.");
-        if (!object.containsKey("answer") && graded)
-            throw new FormatException("Ranking question definition must contain a correct ranking.");
+        JSONSpec.testObject(graded ? jsonSpecGraded : jsonSpecUngraded, object);
 
         this.prompt = (String) object.get("prompt");
 

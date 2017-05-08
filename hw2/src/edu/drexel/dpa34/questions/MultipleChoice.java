@@ -2,6 +2,7 @@ package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.FormatException;
 import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,6 +15,8 @@ import java.util.Scanner;
 public class MultipleChoice extends Question {
     private static String[] labels = {"A", "B", "C", "D", "E"};
     private ArrayList<String> options = new ArrayList<>();
+    private static String jsonSpecUngraded = "{\"prompt\":\"\",\"options\":[\"\"]}";
+    private static String jsonSpecGraded = "{\"prompt\":\"\",\"options\":[\"\"],\"answer\":\"\"}";
 
     /**
      * Create a new MultipleChoice question from user input
@@ -54,12 +57,7 @@ public class MultipleChoice extends Question {
      * @throws FormatException If the JSON is not formatted properly.
      */
     MultipleChoice(JSONObject object, boolean graded) throws FormatException {
-        if (!object.containsKey("prompt"))
-            throw new FormatException("Multiple choice question definition must contain a prompt.");
-        if (!object.containsKey("options"))
-            throw new FormatException("Multiple choice question definition must contain options.");
-        if (!object.containsKey("answer") && graded)
-            throw new FormatException("This multiple choice requires an answer.");
+        JSONSpec.testObject(graded ? jsonSpecGraded : jsonSpecUngraded, object);
 
         this.prompt = (String) object.get("prompt");
         JSONArray options = (JSONArray) object.get("options");

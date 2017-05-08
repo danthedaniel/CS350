@@ -2,18 +2,20 @@ package edu.drexel.dpa34.questions;
 
 import edu.drexel.dpa34.FormatException;
 import edu.drexel.dpa34.InputException;
+import edu.drexel.dpa34.JSONSpec;
 import org.json.simple.JSONObject;
 
 import java.util.Scanner;
 
 public class Essay extends Question {
+    private static String jsonSpec = "{\"prompt\":\"\"}";
+
     Essay(boolean graded) {
         readPrompt();
     }
 
     Essay(JSONObject object, boolean graded) throws FormatException {
-        if (!object.containsKey("prompt"))
-            throw new FormatException("Essay question definition must contain a prompt.");
+        JSONSpec.testObject(jsonSpec, object);
 
         this.prompt = (String) object.get("prompt");
     }
