@@ -8,9 +8,9 @@ import org.json.simple.parser.ParseException;
 /**
  * Contains methods for comparing a reference JSON specification against a JSONObject.
  *
- * Reference specifications define only the types of the values within JSONObjects. An example specification for an
- * object that must have two keys, "foo" and "bar", where "foo" corresponds to an array of strings and "bar"
- * corresponds to a number would look like this:
+ * Reference specifications define only the types of the values within JSONObjects and JSONArrays. An example
+ * specification for an object that must have two keys, "foo" and "bar", where "foo" corresponds to an array of strings
+ * and "bar" corresponds to a number would look like this:
  *
  * {
  *     "foo": [""],
